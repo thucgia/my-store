@@ -8,8 +8,8 @@ function ProductItem(props) {
                 <div className="product-image">
                     <div className="image"> 
                     <a href="detail.html">
-                        <img src={props.images[0]} alt=""/>
-                        <img src={props.images[1]} alt="" className="hover-image"/>
+                        <img src={props.image} alt=""/>
+                        {/* <img src={props.images[1]} alt="" className="hover-image"/> */}
                     </a> 
                 </div>
                     {/* <!-- /.image --> */}

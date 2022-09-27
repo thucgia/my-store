@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductItem from '../products/ProductItem';
 import { product_list } from '../../resources/productlist';
 import { blog_list } from '../../resources/bloglist';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import BlogItem from '../blogs/BlogItem';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Content(props) {
     const [ products, setProducts ] = useState(product_list)
@@ -48,10 +51,20 @@ function Content(props) {
         }
     };
 
+    useEffect(() => {
+      let url = "/products"
+      axios.get(url)
+      .then(res => {
+        toast.success("API loaded successfully", { position: toast.POSITION.TOP_RIGHT})
+        setProducts(res.data)
+      })
+      .catch(err => { toast.error("API loaded failed", { position: toast.POSITION.TOP_RIGHT}) })
+    }, [])
+
     return (
         <div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder"> 
         {/* <!-- ========================================== SECTION – HERO ========================================= --> */}
-        
+        <ToastContainer />
         <div id="hero">
           <div id="owl-main" className="owl-carousel owl-inner-nav owl-ui-sm">
             <div className="item" style={{ backgroundImage: "url(assets/images/sliders/01.jpg)" }}>
@@ -169,16 +182,16 @@ function Content(props) {
         <div className="col-lg-3">
           <h3 className="section-title">Electronics & Digital</h3>
           <ul className="sub-cat">
-          <li><a href="#">Computers</a></li>
-          <li><a href="#">Air Condtion</a></li>
-          <li><a href="#">Mobile Phones</a></li>
-          <li><a href="#">Camera</a></li>
-          <li><a href="#">Television</a></li>
-          <li><a href="#">Sound & Speakers</a></li>
-          <li><a href="#">Games & Audio Music</a></li>
-          <li><a href="#">Digital Watches</a></li>
-          <li><a href="#">Washing Machines</a></li>
-         <li><a href="#">Office Electronics</a></li>
+          <li><a href="!#">Computers</a></li>
+          <li><a href="!#">Air Condtion</a></li>
+          <li><a href="!#">Mobile Phones</a></li>
+          <li><a href="!#">Camera</a></li>
+          <li><a href="!#">Television</a></li>
+          <li><a href="!#">Sound & Speakers</a></li>
+          <li><a href="!#">Games & Audio Music</a></li>
+          <li><a href="!#">Digital Watches</a></li>
+          <li><a href="!#">Washing Machines</a></li>
+         <li><a href="!#">Office Electronics</a></li>
           </ul>
           </div>
           <div className="col-lg-9">

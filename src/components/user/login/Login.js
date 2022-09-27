@@ -37,7 +37,7 @@ function Login(props) {
 
         axios.post(url, user)
         .then(res => {
-            toast.success("Successfully Login!")
+            toast.success("Successfully Login!", { position: toast.POSITION.TOP_RIGHT})
         })
         .catch(err => {
             toast.error(err.response.data, { position: toast.POSITION.TOP_RIGHT })

@@ -24,6 +24,7 @@ function SideBar(props) {
         }
     };
     const showMegaMenu = (e) => {
+        e.preventDefault()
         let mega_menu_id = e.target.id
         if (megaMenu !== "" && megaMenu === mega_menu_id) setMegaMenu("")
         else {
@@ -38,7 +39,7 @@ function SideBar(props) {
                 <div className="head"><i className="icon fa fa-align-justify fa-fw"></i> Categories</div>
                 <nav className="yamm megamenu-horizontal">
                     <ul className="nav">
-                        <li className={"dropdown menu-item" + (megaMenu === "clothing" ? " open" : "")}> <a href="!#" className="dropdown-toggle" data-toggle="dropdown" id="clothing" onClick={showMegaMenu}><i className="icon fa fa-shopping-bag" aria-hidden="true"></i>Clothing</a>
+                        <li className={"dropdown menu-item" + (megaMenu === "clothing" ? " open" : "")}> <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="clothing" onClick={showMegaMenu}><i className="icon fa fa-shopping-bag" aria-hidden="true"></i>Clothing</a>
                             <ul className="dropdown-menu mega-menu">
                                 <li className="yamm-content">
                                     <div className="row">
