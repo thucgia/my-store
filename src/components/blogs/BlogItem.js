@@ -10,7 +10,7 @@ function BlogItem(props) {
                 {/* <!-- /.blog-post-image --> */}
                 
                 <div className="blog-post-info text-left">
-                <h3 className="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
+                <h3 className="name"><a href="!#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
                 <span className="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
                 <p className="text">Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
                 </div>
