@@ -10,7 +10,6 @@ function HeaderNav(props) {
         let menu_showing = e.target.id
         if (isShowing !== "" && isShowing === menu_showing) setShowing("")
         else {
-            console.log("test")
             setShowing(menu_showing)
         }
     }
@@ -27,7 +26,7 @@ function HeaderNav(props) {
                 <div className="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                     <div className="nav-outer">
                     <ul className="nav navbar-nav">
-                        { menus && menus.map((item, index) => <MenuItem key={index} {...item} isShowing={isShowing} showMenu={showMenu}/>) }
+                        { menus && menus.map((item, index) => <MenuItem key={index} {...item}/>) }
                     </ul>
                     {/* <!-- /.navbar-nav --> */}
                     <div className="clearfix"></div>

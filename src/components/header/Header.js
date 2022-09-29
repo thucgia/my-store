@@ -7,7 +7,7 @@ function Header(props) {
     return (
         <header className='header-style-1'>
             <HeaderTop/>
-            <MainHeader/>
+            <MainHeader cart={props.cart} setCart={props.setCart}/>
             <HeaderNav/>
         </header>
     );

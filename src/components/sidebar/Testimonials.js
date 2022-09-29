@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import CarouselButtonGroup from '../carousel-btn-group/CarouselButtonGroup';
 
 function Testimonials(props) {
     const responsive = {
@@ -26,22 +27,21 @@ function Testimonials(props) {
         <div className="sidebar-widget outer-top-vs ">
             <div id="advertisement" className="advertisement">
                 <Carousel
-                swipeable={false}
-                draggable={false}
-                showDots={true}
-                responsive={responsive}
-                ssr={true} // means to render carousel on server-side.
-                infinite={true}
-                //   autoPlay={this.props.deviceType !== "mobile" ? true : false}
-                autoPlaySpeed={1000}
-                keyBoardControl={true}
-                customTransition="all .5"
-                transitionDuration={500}
-                containerClass="carousel-container"
-                removeArrowOnDeviceType={["tablet", "mobile"]}
-                //   deviceType={this.props.deviceType}
-                dotListClass="custom-dot-list-style"
-                itemClass="carousel-item-padding-40-px"
+                    arrows={false}
+                    swipeable={false}
+                    draggable={false}
+                    showDots={true}
+                    responsive={responsive}
+                    ssr={true} // means to render carousel on server-side.
+                    autoPlaySpeed={1000}
+                    keyBoardControl={true}
+                    customTransition="all .5"
+                    transitionDuration={500}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    itemClass="carousel-item-padding-40-px"
+                    renderButtonGroupOutside={true}
+                    customButtonGroup={<CarouselButtonGroup/>}
                 >
                     <div className="item">
                     <div className="avatar"><img src="assets/images/testimonials/member1.png" alt="123"/></div>

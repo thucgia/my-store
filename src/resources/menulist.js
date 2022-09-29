@@ -5,7 +5,8 @@ export const menu_list = [
         child: [],
         image: "",
         type: "container",
-        mega_menu: true
+        mega_menu: true,
+        route: "/"
     },
     {
         id: "services",
@@ -19,7 +20,8 @@ export const menu_list = [
         ],
         image: "",
         type: "pages",
-        mega_menu: false
+        mega_menu: false,
+        route: "category"
     },
     {
         id: "phone_type",
@@ -40,7 +42,8 @@ export const menu_list = [
         ],
         image: "",
         type: "pages",
-        mega_menu: false
+        mega_menu: false,
+        route: "category"
     },
     {
         id: "tips_faq",
@@ -48,7 +51,8 @@ export const menu_list = [
         child: [],
         image: "",
         type: "pages",
-        mega_menu: false
+        mega_menu: false,
+        route: "faq"
     },
     {
         id: "contact",
@@ -56,6 +60,7 @@ export const menu_list = [
         child: [],
         image: "",
         type: "pages",
-        mega_menu: false
+        mega_menu: false,
+        route: "contact"
     }
 ]

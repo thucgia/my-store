@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function HeaderTop(props) {
     return (
@@ -8,7 +9,7 @@ function HeaderTop(props) {
                     <div className="cnt-account">
                         <ul className="list-unstyled">
                             <li className="myaccount"><a href="!#"><span>My Account</span></a></li>
-                            <li className="login"><a href="!#"><span>Login</span></a></li>
+                            <li className="login"><Link to="/login"><span>Login</span></Link></li>
                         </ul>
                     </div>
                     <div className="clearfix"></div>

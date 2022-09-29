@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import Home from './components/home/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NotFound from './components/notfound/NotFound';
+import Category from './components/category/Category';
+import FAQ from './components/faq/FAQ';
+import Contact from './components/contact/Contact';
+import Login from './components/user/login/Login';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+    const [ cart, setCart ] = useState([])
+    return (
+        <div>
+            <BrowserRouter>
+                <Header cart={cart} setCart={setCart}/>
+                <Routes>
+                    <Route path='/' element={<Home cart={cart} setCart={setCart}/>}/>
+                    {/* <Route path='/login' element={<Login/>}/>
+                    <Route path='/category' element={<Category/>}/>
+                    <Route path='/faq' element={<FAQ/>}/>
+                    <Route path='/contact' element={<Contact/>}/>
+                    <Route path='*' element={<NotFound/>}/> */}
+                </Routes>
+            </BrowserRouter>
+            <Footer/>
+        </div>
+    );
 }
 
 export default App;
