@@ -8,7 +8,7 @@ function HeaderTop(props) {
                 <div className="header-top-inner">
                     <div className="cnt-account">
                         <ul className="list-unstyled">
-                            <li className="myaccount"><a href="!#"><span>My Account</span></a></li>
+                            <li className="myaccount"><Link to="/profile"><span>My Account</span></Link></li>
                             <li className="login"><Link to="/login"><span>Login</span></Link></li>
                         </ul>
                     </div>

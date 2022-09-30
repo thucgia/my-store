@@ -40,19 +40,20 @@ function ProductItem(props) {
                         <div className="action">
                         <ul className="list-unstyled">
                             <li className="add-cart-button btn-group">
-                            <button
-                                data-toggle="tooltip"
-                                className="btn btn-primary icon"
-                                type="button"
-                                title="Add Cart"
-                                onClick={addToCart}
-                            >
-                                <i className="fa fa-shopping-cart"></i>
-                            </button>
-                            {/* <button className="btn btn-primary cart-btn" type="button">Add to cart</button> */}
+                                <button
+                                    data-toggle="tooltip"
+                                    className="btn btn-primary icon"
+                                    type="button"
+                                    title="Add Cart"
+                                    onClick={addToCart}
+                                >
+                                    <i className="fa fa-shopping-cart"></i>
+                                </button>
+                                {/* <button className="btn btn-primary cart-btn" type="button">Add to cart</button> */}
                             </li>
-                            <li className="lnk wishlist"> <a data-toggle="tooltip" className="add-to-cart" href="detail.html" title="Wishlist"> <i className="icon fa fa-heart"></i> </a> </li>
-                            <li className="lnk"> <a data-toggle="tooltip" className="add-to-cart" href="detail.html" title="Compare"> <i className="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                            <li className="lnk wishlist">
+                                <a data-toggle="tooltip" className="add-to-cart" href="detail.html" title="Wishlist"> <i className="icon fa fa-heart"></i></a>
+                            </li>
                         </ul>
                         </div>
                         {/* <!-- /.action -->  */}

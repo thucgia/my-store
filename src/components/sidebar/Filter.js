@@ -4,8 +4,6 @@ import ColorFilter from './ColorFilter';
 import ManufacturesFilter from './ManufacturesFilter';
 import PriceSilderFilter from './PriceSilderFilter';
 import ProductTag from './ProductTag';
-import Testimonials from '../sidebar/Testimonials'
-import NewLetter from '../sidebar/NewLetter'
 
 function Filter(props) {
     return (
@@ -30,18 +28,6 @@ function Filter(props) {
                 {/* <!-- ============================================== COLOR: END ============================================== --> */}
                 {/* <!-- ============================================== PRODUCT TAGS ============================================== --> */}
                 <ProductTag/>
-                {/* <!-- /.sidebar-widget --> */}
-                {/* <!-- /.Testimonials --> */}
-                <Testimonials/>
-
-                {/* <!-- ============================================== Testimonials: END ============================================== --> */}
-
-                {/* <!-- ============================================== NEWSLETTER ============================================== --> */}
-                <NewLetter/>
-                {/* <!-- /.sidebar-widget --> */}
-                {/* <!-- ============================================== NEWSLETTER: END ============================================== --> */}
-
-
             </div>
             {/* <!-- /.sidebar-filter --> */}
         </div>

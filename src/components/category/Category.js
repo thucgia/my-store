@@ -1,24 +1,13 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect } from 'react';
 import ProductItem from '../products/ProductItem';
 import SideBar from './SideBar';
 
 function Category(props) {
-    const [ products, setProducts ] = useState([])
     useEffect(() => {
-        let url = "/products"
-        axios.get(url)
-        .then(res => {
-          toast.success("API loaded successfully", { position: toast.POSITION.TOP_RIGHT})
-          setProducts(res.data)
-        })
-        .catch(err => { toast.error("API loaded failed", { position: toast.POSITION.TOP_RIGHT}) })
-      }, [])
+        props.getProductsAPI.request()
+    }, [])
     return (
         <>
-            <ToastContainer/>
             <div className="breadcrumb">
                 <div className="container">
                     <div className="breadcrumb-inner">
@@ -40,7 +29,7 @@ function Category(props) {
                             <div className="clearfix filters-container">
                             <div className="row">
                                 {/* <!-- /.col --> */}
-                                <div className="col col-sm-12 col-md-5 col-lg-5 hidden-sm">
+                                <div className="col col-sm-12 col-md-5 col-lg-8 hidden-sm">
                                 <div className="col col-sm-6 col-md-6 no-padding">
                                     <div className="lbl-cnt"> <span className="">Sort by</span>
                                     <div className="fld inline">
@@ -84,8 +73,8 @@ function Category(props) {
                                 <div className="tab-pane active " id="grid-container">
                                 <div className="category-product">
                                     <div className="row">
-                                    { products && products.map((item, index) => 
-                                    <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem {...item} width="184px"/></div>
+                                    { props.getProductsAPI.data?.map((item, index) => 
+                                        <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem {...item} width="184px" setCart={props.setCart}/></div>
                                     ) }
                                     {/* <!-- /.item --> */}
                                     </div>

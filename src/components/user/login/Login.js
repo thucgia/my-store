@@ -94,69 +94,64 @@ function Login(props) {
                 </div>
             </div>
             <ToastContainer />
-
             <div className="body-content">
                 <div className="container">
                     <div className="sign-in-page">
                         <div className="row">
-
                             <div className="col-md-6 col-sm-6 sign-in">
                                 <h4 className="">Sign in</h4>
                                 <p className="">Hello, Welcome to your account.</p>
-                                    {/* <div className="form-group">
-                                        <label className="info-title" htmlFor="login-email">Email Address <span>*</span></label>
-                                        <input type="email" className="form-control unicase-form-control text-input" id="login-email" required onChange={handleLogin} name="login-email"/>
-                                        <p className='err-msg'>{(isAction === "login") && (!isValidEmail) && isErr === "invalid_email" && ErrorList[isErr]}</p>
-                                    </div> */}
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="login-username">Username <span>*</span></label>
-                                        <input type="text" className="form-control unicase-form-control text-input" id="login-username" required onChange={handleLogin} name="login-username"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="login-password">Password <span>*</span></label>
-                                        <input type="password" className="form-control unicase-form-control text-input" id="login-password" required onChange={handleLogin} name="login-password"/>
-                                    </div>
-                                    <div className="radio outer-xs">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />Remember me!
-                                        </label>
-                                        <a href="#" className="forgot-password pull-right">Forgot your Password?</a>
-                                    </div>
-                                    <button type="button" className="btn-upper btn btn-primary checkout-page-button" onClick={login}>Login</button>
+                                {/* <div className="form-group">
+                                    <label className="info-title" htmlFor="login-email">Email Address <span>*</span></label>
+                                    <input type="email" className="form-control unicase-form-control text-input" id="login-email" required onChange={handleLogin} name="login-email"/>
+                                    <p className='err-msg'>{(isAction === "login") && (!isValidEmail) && isErr === "invalid_email" && ErrorList[isErr]}</p>
+                                </div> */}
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="login-username">Username <span>*</span></label>
+                                    <input type="text" className="form-control unicase-form-control text-input" id="login-username" required onChange={handleLogin} name="login-username"/>
+                                </div>
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="login-password">Password <span>*</span></label>
+                                    <input type="password" className="form-control unicase-form-control text-input" id="login-password" required onChange={handleLogin} name="login-password"/>
+                                </div>
+                                {/* <div className="radio outer-xs">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />Remember me!
+                                    </label>
+                                    <a href="#" className="forgot-password pull-right">Forgot your Password?</a>
+                                </div> */}
+                                <button type="button" className="btn-upper btn btn-primary checkout-page-button" onClick={login}>Login</button>
                             </div>
 
                             <div className="col-md-6 col-sm-6 create-new-account">
                                 <h4 className="checkout-subtitle">Create a new account</h4>
                                 <p className="text title-tag-line">Create your new account.</p>
-                                <form className="register-form outer-top-xs">
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="email">Email Address <span>*</span></label>
-                                        <input type="email" className="form-control unicase-form-control text-input" id="email" name="register-email" onChange={handleRegister}/>
-                                        <p className='err-msg'>{(isAction === "register") && (!isValidEmail) && isErr === "invalid_email" && ErrorList[isErr]}</p>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="name">Name <span>*</span></label>
-                                        <input type="text" className="form-control unicase-form-control text-input" id="name" name="register-username" onChange={handleRegister}/>
-                                        <p className='err-msg'></p>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="phone">Phone Number <span>*</span></label>
-                                        <input type="number" className="form-control unicase-form-control text-input" id="phone" name="register-phone" onChange={handleRegister}/>
-                                        <p className='err-msg'></p>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="password">Password <span>*</span></label>
-                                        <input type="password" className="form-control unicase-form-control text-input" id="password" name="register-password" onChange={handleRegister}/>
-                                        <p className='err-msg'>{(isAction === "register") && (!isValidPassword) && isErr === "invalid_password" && ErrorList[isErr]}</p>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="info-title" htmlFor="confirmPassword">Confirm Password <span>*</span></label>
-                                        <input type="password" className="form-control unicase-form-control text-input" id="confirmPassword" name="register-confirm-pwd" onChange={handleRegister}/>
-                                        <p className='err-msg'>{(isAction === "register") && (!isPwdMatch) && isErr === "not_match_pwd" && ErrorList[isErr]}</p>
-                                    </div>
-                                    <button type="button" className="btn-upper btn btn-primary checkout-page-button" onClick={register}>Sign Up</button>
-                                </form>
-
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="email">Email Address <span>*</span></label>
+                                    <input type="email" className="form-control unicase-form-control text-input" id="email" name="register-email" onChange={handleRegister}/>
+                                    <p className='err-msg'>{(isAction === "register") && (!isValidEmail) && isErr === "invalid_email" && ErrorList[isErr]}</p>
+                                </div>
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="name">Name <span>*</span></label>
+                                    <input type="text" className="form-control unicase-form-control text-input" id="name" name="register-username" onChange={handleRegister}/>
+                                    <p className='err-msg'></p>
+                                </div>
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="phone">Phone Number <span>*</span></label>
+                                    <input type="number" className="form-control unicase-form-control text-input" id="phone" name="register-phone" onChange={handleRegister}/>
+                                    <p className='err-msg'></p>
+                                </div>
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="password">Password <span>*</span></label>
+                                    <input type="password" className="form-control unicase-form-control text-input" id="password" name="register-password" onChange={handleRegister}/>
+                                    <p className='err-msg'>{(isAction === "register") && (!isValidPassword) && isErr === "invalid_password" && ErrorList[isErr]}</p>
+                                </div>
+                                <div className="form-group">
+                                    <label className="info-title" htmlFor="confirmPassword">Confirm Password <span>*</span></label>
+                                    <input type="password" className="form-control unicase-form-control text-input" id="confirmPassword" name="register-confirm-pwd" onChange={handleRegister}/>
+                                    <p className='err-msg'>{(isAction === "register") && (!isPwdMatch) && isErr === "not_match_pwd" && ErrorList[isErr]}</p>
+                                </div>
+                                <button type="button" className="btn-upper btn btn-primary checkout-page-button" onClick={register}>Sign Up</button>
                             </div>
                         </div>
                     </div>

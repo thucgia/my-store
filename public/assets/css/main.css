@@ -2832,10 +2832,10 @@ font-family: FontAwesome;
   transition: all 0.5s linear 0s;
   width: 100%;
   z-index: 666;
-  left: 50%;
+  left: 25%;
   position:absolute;
    top:0;
-    margin-left:-70px
+    /* margin-left:-70px */
  
 }
 .product .cart .action ul li {

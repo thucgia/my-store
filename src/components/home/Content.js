@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ProductItem from '../products/ProductItem';
-import { product_list } from '../../resources/productlist';
 import { blog_list } from '../../resources/bloglist';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import BlogItem from '../blogs/BlogItem';
 import CarouselButtonGroup from '../carousel-btn-group/CarouselButtonGroup'
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Content(props) {
-    const [products, setProducts] = useState([])
     const [blogs, setBlogs] = useState(blog_list)
     const responsive_products = {
         superLargeDesktop: {
@@ -52,23 +47,12 @@ function Content(props) {
         }
     };
 
-    const getProducts = () => {
-        let url = "/products"
-        axios.get(url)
-        .then(res => {
-            toast.success("API loaded successfully", { position: toast.POSITION.TOP_RIGHT })
-            setProducts(res.data)
-        })
-        .catch(err => { toast.error("API loaded failed", { position: toast.POSITION.TOP_RIGHT }) })
-    }
-
     useEffect(() => {
-        getProducts()
+        props.getProductsAPI.request()
     },[])
 
     return (
         <div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
-            <ToastContainer />
             <div id="product-tabs-slider" className="scroll-tabs">
                 <div className="more-info-tab clearfix ">
                     <h3 className="new-product-title pull-left">New Products</h3>
@@ -101,7 +85,7 @@ function Content(props) {
                                 renderButtonGroupOutside={true}
                                 customButtonGroup={<CarouselButtonGroup/>}
                             >
-                                {products && products.map((item, index) => <ProductItem key={index} {...item} width="184px" setCart={props.setCart} />)}
+                                {props.getProductsAPI.data?.map((item, index) => <ProductItem key={index} {...item} width="184px" setCart={props.setCart} />)}
                             </Carousel>
                             </div>
                         </div>
@@ -181,7 +165,7 @@ function Content(props) {
                                 renderButtonGroupOutside={true}
                                 customButtonGroup={<CarouselButtonGroup/>}
                             >
-                                {products && products.map((item, index) => <ProductItem key={index} {...item} width="172px" />)}
+                                {props.getProductsAPI.data?.map((item, index) => <ProductItem key={index} {...item} width="172px" />)}
                             </Carousel>
                         </div>
                     </div>
