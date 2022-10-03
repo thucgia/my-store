@@ -8,7 +8,7 @@ function Home(props) {
             <div className="container">
                 <div className="row">
                     <SideBar/>
-                    <Content cart={props.cart} setCart={props.setCart} getProductsAPI={props.getProductsAPI}/>
+                    <Content cart={props.cart} setCart={props.setCart}/>
                 </div>
             </div>
         </div>

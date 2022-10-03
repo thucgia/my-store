@@ -3,13 +3,21 @@ import React from 'react';
 function ProductItem(props) {
     const addToCart = () => {
         props.setCart((prevState) => {
+            // Check item is existed
+            let id_exist = prevState.findIndex(item => item.id === props.id)
+            // END
             let items = [...prevState]
-            items.push({
-                id: props.id,
-                title: props.title,
-                price: props.price,
-                image: props.image
-            })
+            if (id_exist !== -1) {
+                items[id_exist].count++
+            } else {
+                items.push({
+                    id: props.id,
+                    title: props.title,
+                    price: props.price,
+                    image: props.image,
+                    count: 1
+                })
+            }
             return items
         })
     }

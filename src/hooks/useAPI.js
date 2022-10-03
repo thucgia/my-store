@@ -11,7 +11,7 @@ export const useAPI = (apiFunc) => {
         try {
             const result = await apiFunc(...args)
             setData(result.data)
-        } 
+        }
         catch(err) {
             setError(err.message || "Unexpected Error!")
         }

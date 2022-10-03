@@ -1799,7 +1799,7 @@ header{
   line-height: 28px;
 }
 .sidebar .sidebar-module-container .sidebar-widget .sidebar-widget-body .accordion .accordion-group .accordion-heading .accordion-toggle:after {
-  content:"\f068";
+  /* content:"\f068"; */
   float: right;
   font-family: fontawesome;
 }
