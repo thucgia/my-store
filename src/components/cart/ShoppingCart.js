@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CartItem from './CartItem';
 
 function ShoppingCart(props) {
+    useEffect(() => {
+        document.title = props.title
+    }, [])
     return (
         <>
             <div className="breadcrumb">

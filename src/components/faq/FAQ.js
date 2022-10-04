@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { faq_list } from '../../resources/faqlist'
 import FAQItem from './FAQItem';
 
 function FAQ(props) {
+    useEffect(() => {
+        document.title = props.title
+    }, [])
     return (
         <>
             <div className="breadcrumb">

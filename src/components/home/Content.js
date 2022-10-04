@@ -11,6 +11,7 @@ import Loading from '../loading/Loading'
 
 function Content(props) {
     const getProductsAPI = useAPI(productAPI.getProducts)
+    const [ products, setProducts ] = useState([])
     const [blogs, setBlogs] = useState(blog_list)
     const responsive_products = {
         superLargeDesktop: {
@@ -52,7 +53,7 @@ function Content(props) {
     };
 
     useEffect(() => {
-        getProductsAPI.request()
+        getProductsAPI.request().then(res => setProducts(res.result))
     },[])
 
     return (
@@ -83,7 +84,7 @@ function Content(props) {
                                 renderButtonGroupOutside={true}
                                 customButtonGroup={<CarouselButtonGroup/>}
                             >
-                                {getProductsAPI.data?.map((item, index) => <ProductItem key={index} {...item} width="184px" setCart={props.setCart} />)}
+                                {products?.map((item, index) => <ProductItem key={index} {...item} width="184px" setCart={props.setCart} />)}
                             </Carousel>
                             </div>
                         </div>
@@ -163,7 +164,7 @@ function Content(props) {
                                 renderButtonGroupOutside={true}
                                 customButtonGroup={<CarouselButtonGroup/>}
                             >
-                                {getProductsAPI.data?.map((item, index) => <ProductItem key={index} {...item} width="172px" />)}
+                                {products?.map((item, index) => <ProductItem key={index} {...item} width="172px" />)}
                             </Carousel>
                         </div>
                     </div>

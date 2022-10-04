@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import categoryAPI from '../../api/products'
 import { useAPI } from '../../hooks/useAPI';
 
 function CategoryFilter(props) {
     const getAllCategories = useAPI(categoryAPI.getAllCategories)
+    const [ categories, setCategories ] = useState([])
     useEffect(() => {
-        getAllCategories.request()
+        getAllCategories.request().then(data => setCategories(data.result))
     }, [])
     return (
         <div className="sidebar-widget">
@@ -15,7 +16,7 @@ function CategoryFilter(props) {
             </div>
             <div className="sidebar-widget-body">
                 <div className="accordion">
-                    { getAllCategories.data?.map((item, index) => 
+                    { categories?.map((item, index) => 
                     <div className="accordion-group" key={index}>
                         <div className="accordion-heading"> <a className="accordion-toggle" onClick={(e) => { e.preventDefault(); props.setCategory(item); props.setSort("") }}> { item } </a> </div>
                     </div>

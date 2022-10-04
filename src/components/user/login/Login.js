@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ErrorList } from '../../../resources/Error';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,10 @@ function Login(props) {
     const [isPwdMatch, setPwdMatch] = useState(true)
     const [isErr, setErr] = useState("")
     const [isAction, setAction] = useState("")
+
+    useEffect(() => {
+        document.title = props.title
+    }, [])
 
     const handleLogin = (e) => {
         setAction("login")

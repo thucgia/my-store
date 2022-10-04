@@ -34,14 +34,14 @@ function App(props) {
             <BrowserRouter>
                 <Header cart={cart} setCart={setCart} totalPrice={totalPrice()} deleteCartItem={deleteCartItem}/>
                 <Routes>
-                    <Route path='/' element={<Home cart={cart} setCart={setCart} />}/>
-                    <Route path='/login' element={<Login/>}/>
-                    <Route path='/category' element={<Category cart={cart} setCart={setCart} />}/>
-                    <Route path='/faq' element={<FAQ/>}/>
-                    <Route path='/contact' element={<Contact/>}/>
-                    <Route path='/profile' element={<UpdateProfile/>}/>
-                    <Route path='/shopping-cart' element={<ShoppingCart cart={cart} setCart={setCart} setShowMessage={setShowMessage} setDelCartItem={setDelCartItem}/>}/>
-                    <Route path='*' element={<NotFound/>}/>
+                    <Route path='/' element={<Home cart={cart} setCart={setCart} title="Trang chủ" />}/>
+                    <Route path='/login' element={<Login title="Đăng nhập - Đăng kí"/>}/>
+                    <Route path='/category' element={<Category cart={cart} setCart={setCart} title="Sản phẩm" />}/>
+                    <Route path='/faq' element={<FAQ title="Mẹo và các câu hỏi thường gặp"/>}/>
+                    <Route path='/contact' element={<Contact title="Liên hệ"/>}/>
+                    <Route path='/profile' element={<UpdateProfile title="Cập nhật tài khoản"/>}/>
+                    <Route path='/shopping-cart' element={<ShoppingCart cart={cart} setCart={setCart} setShowMessage={setShowMessage} setDelCartItem={setDelCartItem} title="Giỏ hàng"/>}/>
+                    <Route path='*' element={<NotFound title="Không tìm thấy trang"/>}/>
                 </Routes>
             </BrowserRouter>
             <Footer/>

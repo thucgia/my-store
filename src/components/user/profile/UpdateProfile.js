@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function UpdateProfile(props) {
+    useEffect(() => {
+        document.title = props.title
+    }, [])
     return (
         <div>
             <div className="breadcrumb">
