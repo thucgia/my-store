@@ -1,10 +1,16 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ErrorList } from '../../../resources/Error';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAPI } from '../../../hooks/useAPI';
+import LoginAPI from '../../../api/user'
+import Loading from '../../loading/Loading';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
+    let navigate = useNavigate()
+    const getUserLogin = useAPI(LoginAPI.Login)
+
     const [userLogin, setUserLogin] = useState({ "login-username": "", "login-password": "" })
     const [userRegister, setUserRegister] = useState({ "register-email": "", "register-username": "", "register-phone": "", "register-password": "" })
     const [isValidEmail, setValidEmail] = useState(false)
@@ -35,17 +41,20 @@ function Login(props) {
     const login = (e) => {
         e.preventDefault()
         const user = {}
-        const url = "https://fakestoreapi.com/auth/login"
         user.username = userLogin["login-username"]
         user.password = userLogin["login-password"]
 
-        axios.post(url, user)
+        getUserLogin.request(user)
         .then(res => {
-            toast.success("Successfully Login!", { position: toast.POSITION.TOP_RIGHT})
+            if (res.status) {
+                toast.success("Successfully Login!", { position: toast.POSITION.TOP_RIGHT})
+                props.setToken(res.result)
+                navigate("/")
+            } else {
+                toast.error(res.result, { position: toast.POSITION.TOP_RIGHT })
+            }
         })
-        .catch(err => {
-            toast.error(err.response.data, { position: toast.POSITION.TOP_RIGHT })
-        })
+
     }
     const register = (e) => {
         e.preventDefault()
@@ -87,6 +96,7 @@ function Login(props) {
 
     return (
         <div>
+            { getUserLogin.loading && <Loading/> }
             <div className="breadcrumb">
                 <div className="container">
                     <div className="breadcrumb-inner">

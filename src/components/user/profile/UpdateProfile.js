@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function UpdateProfile(props) {
+    let navigate = useNavigate()
     useEffect(() => {
         document.title = props.title
     }, [])
+
     return (
         <div>
             <div className="breadcrumb">
