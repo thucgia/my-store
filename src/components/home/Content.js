@@ -8,11 +8,21 @@ import CarouselButtonGroup from '../carousel-btn-group/CarouselButtonGroup'
 import { useAPI } from '../../hooks/useAPI'
 import productAPI from '../../api/products'
 import Loading from '../loading/Loading'
+import { faq_list } from '../../resources/faqlist';
+import FAQItem from '../faq/FAQItem'
+import { Link } from 'react-router-dom';
+import FeatureItem from './FeatureItem';
+import { features_list } from '../../resources/featureslist';
+import './home.css'
+import { expertslist } from '../../resources/expertslist';
+import CarouselButtonGroupCus1 from '../carousel-btn-group/CarouselButtonGroupCus1';
 
 function Content(props) {
     const getProductsAPI = useAPI(productAPI.getProducts)
     const [ products, setProducts ] = useState([])
-    const [blogs, setBlogs] = useState(blog_list)
+    const blogs = [...blog_list].slice(0, 4)
+    const faqs = [...faq_list].slice(0, 3)
+
     const responsive_products = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -32,7 +42,7 @@ function Content(props) {
             items: 1
         }
     };
-    const responsive_blogs = {
+    const responsive_experts_img = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 3000 },
@@ -41,14 +51,6 @@ function Content(props) {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
             items: 3
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
         }
     };
 
@@ -57,7 +59,7 @@ function Content(props) {
     },[])
 
     return (
-        <div className="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
+        <div>
             { getProductsAPI.loading && <Loading/> }
             <div id="product-tabs-slider" className="scroll-tabs">
                 <div className="more-info-tab clearfix ">
@@ -89,134 +91,33 @@ function Content(props) {
                             </div>
                         </div>
                     </div>
-                    {/* <!-- /.tab-pane --> */}
 
                 </div>
-                {/* <!-- /.tab-content -->  */}
             </div>
-            {/* <!-- /.scroll-tabs -->  */}
-            {/* <!-- ============================================== SCROLL TABS : END ============================================== -->  */}
-            {/* <!-- ============================================== WIDE PRODUCTS ============================================== --> */}
-            <div className="wide-banners outer-bottom-xs">
+            <div className="checkout-box faq-page">
                 <div className="row">
-                    <div className="col-md-4 col-sm-4">
-                        <div className="wide-banner cnt-strip">
-                            <div className="image"> <img className="img-responsive" src="assets/images/banners/home-banner1.jpg" alt="" /></div>
+                    <div className="col-md-12">
+                        <h2 className="heading-title">Frequently Asked Questions</h2>
+                        <div className="panel-group checkout-steps" id="accordion">
+                            {/* items */}
+                            { faqs && faqs.map((item, index) => <FAQItem key={index} { ...item } index={index}/>) }
                         </div>
-                        {/* <!-- /.wide-banner -->  */}
+                        <button className="btn btn-primary" style={{ float: 'right' }}><Link to='/faq' style={{ color: '#fff' }}>View All FAQs</Link></button>
                     </div>
-
-                    <div className="col-md-4 col-sm-4">
-                        <div className="wide-banner cnt-strip">
-                            <div className="image"> <img className="img-responsive" src="assets/images/banners/home-banner3.jpg" alt="" /></div>
-                        </div>
-                        {/* <!-- /.wide-banner -->  */}
-                    </div>
-
-                    {/* <!-- /.col --> */}
-                    <div className="col-md-4 col-sm-4">
-                        <div className="wide-banner cnt-strip">
-                            <div className="image"> <img className="img-responsive" src="assets/images/banners/home-banner2.jpg" alt="" /></div>
-                        </div>
-                        {/* <!-- /.wide-banner -->  */}
-                    </div>
-                    {/* <!-- /.col -->  */}
                 </div>
-                {/* <!-- /.row -->  */}
             </div>
-            {/* <!-- /.wide-banners -->  */}
-
-            {/* <!-- ============================================== WIDE PRODUCTS : END ============================================== -->  */}
-            {/* <!-- ============================================== FEATURED PRODUCTS ============================================== --> */}
-            <section className="section featured-product">
-                <div className="row">
-                    <div className="col-lg-3">
-                        <h3 className="section-title">Electronics & Digital</h3>
-                        <ul className="sub-cat">
-                            <li><a href="!#">Computers</a></li>
-                            <li><a href="!#">Air Condtion</a></li>
-                            <li><a href="!#">Mobile Phones</a></li>
-                            <li><a href="!#">Camera</a></li>
-                            <li><a href="!#">Television</a></li>
-                            <li><a href="!#">Sound & Speakers</a></li>
-                            <li><a href="!#">Games & Audio Music</a></li>
-                            <li><a href="!#">Digital Watches</a></li>
-                            <li><a href="!#">Washing Machines</a></li>
-                            <li><a href="!#">Office Electronics</a></li>
-                        </ul>
-                    </div>
-                    <div className="col-lg-9">
-                        <div className="homepage-owl-carousel custom-carousel owl-theme outer-top-xs" style={{ position: "relative" }}>
-                            <Carousel
-                                arrows={false}
-                                swipeable={false}
-                                draggable={false}
-                                showDots={false}
-                                responsive={responsive_products}
-                                ssr={true} // means to render carousel on server-side.
-                                autoPlaySpeed={1000}
-                                keyBoardControl={true}
-                                customTransition="all .5"
-                                transitionDuration={500}
-                                containerClass="carousel-container"
-                                removeArrowOnDeviceType={["tablet", "mobile"]}
-                                itemClass="carousel-item-padding-40-px"
-                                renderButtonGroupOutside={true}
-                                customButtonGroup={<CarouselButtonGroup/>}
-                            >
-                                {products?.map((item, index) => <ProductItem key={index} {...item} width="172px" />)}
-                            </Carousel>
-                        </div>
-                    </div>
+            <div className="wide-banners outer-bottom-xs outer-top-vs">
+                <div className='feature-title-section outer-bottom-sm'>
+                    <h2 className='h2'>Our Experts</h2>
+                    <p>Introduce Our Professional</p>
                 </div>
-                {/* <!-- /.home-owl-carousel -->  */}
-            </section>
-            {/* <!-- /.section -->  */}
-            {/* <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->  */}
-            {/* <!-- ============================================== WIDE PRODUCTS ============================================== --> */}
-            <div className="wide-banners outer-bottom-xs">
                 <div className="row">
-                    <div className="col-md-8">
-                        <div className="wide-banner1 cnt-strip">
-                            <div className="image"> <img className="img-responsive" src="assets/images/banners/home-banner.jpg" alt="" /></div>
-                            <div className="strip strip-text">
-                                <div className="strip-inner">
-                                    <h2 className="text-right">Amazing Sunglasses<br />
-                                        <span className="shopping-needs">Get 40% off on selected items</span></h2>
-                                </div>
-                            </div>
-                            <div className="new-label">
-                                <div className="text">NEW</div>
-                            </div>
-                            {/* <!-- /.new-label -->  */}
-                        </div>
-                        {/* <!-- /.wide-banner -->  */}
-                    </div>
-                    {/* <!-- /.col -->  */}
-                    <div className="col-md-4">
-                        <div className="wide-banner cnt-strip">
-                            <div className="image"> <img className="img-responsive" src="assets/images/banners/home-banner4.jpg" alt="" /></div>
-                            {/* <!-- /.new-label -->  */}
-                        </div>
-                        {/* <!-- /.wide-banner -->  */}
-                    </div>
-
-                </div>
-                {/* <!-- /.row -->  */}
-            </div>
-            {/* <!-- /.wide-banners -->  */}
-            {/* <!-- ============================================== WIDE PRODUCTS : END ============================================== -->  */}
-            {/* <!-- ============================================== BLOG SLIDER ============================================== --> */}
-            <section className="section latest-blog outer-bottom-vs">
-                <h3 className="section-title">Latest form Blog</h3>
-                <div className="blog-slider-container outer-top-xs">
-                    <div className="blog-slider custom-carousel" style={{ position: "relative" }}>
                     <Carousel
                         arrows={false}
                         swipeable={false}
                         draggable={false}
                         showDots={false}
-                        responsive={responsive_blogs}
+                        responsive={responsive_experts_img}
                         ssr={true} // means to render carousel on server-side.
                         autoPlaySpeed={1000}
                         keyBoardControl={true}
@@ -226,21 +127,35 @@ function Content(props) {
                         removeArrowOnDeviceType={["tablet", "mobile"]}
                         itemClass="carousel-item-padding-40-px"
                         renderButtonGroupOutside={true}
-                        customButtonGroup={<CarouselButtonGroup/>}
+                        customButtonGroup={<CarouselButtonGroupCus1/>}
                     >
-                        {blogs && blogs.map((item, index) => <BlogItem key={index} {...item} width="451px" />)}
+                        {expertslist?.map((item, index) => 
+                            <div align="center" key={index}>
+                                <div className="wide-banner cnt-strip">
+                                    <div className="image"> <img className="img-responsive" src={item} alt="" /></div>
+                                </div>
+                            </div>
+                        )}
                     </Carousel>
-                    </div>
-                    {/* <!-- /.owl-carousel -->  */}
                 </div>
-                {/* <!-- /.blog-slider-container -->  */}
+            </div>
+            <div className='container'>
+                <div className='feature-title-section outer-bottom-sm'>
+                    <h2 className='h2'>Why Choose Us?</h2>
+                    <p>Some of Our Features</p>
+                </div>
+                <div className='row'>
+                    { features_list.map((item, index) => <div className='col-md-3 col-sm-3' key={index}><FeatureItem {...item} /></div>) }
+                </div>
+            </div>
+            <section className="section latest-blog outer-bottom-vs">
+                <h3 className="section-title">Latest form Blog</h3>
+                <div className="blog-slider-container outer-top-xs">
+                    <div className="blog-slider custom-carousel" >
+                        {blogs && blogs.map((item, index) => <BlogItem key={index} {...item} />)}
+                    </div>
+                </div>
             </section>
-            {/* <!-- /.section -->  */}
-            {/* <!-- ============================================== BLOG SLIDER : END ============================================== -->  */}
-            {/* <!-- /.home-owl-carousel -->  */}
-            {/* <!-- /.section -->  */}
-            {/* <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->  */}
-
         </div>
     );
 }

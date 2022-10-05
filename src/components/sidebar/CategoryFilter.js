@@ -16,6 +16,9 @@ function CategoryFilter(props) {
             </div>
             <div className="sidebar-widget-body">
                 <div className="accordion">
+                    <div className="accordion-group">
+                        <div className="accordion-heading"> <a className="accordion-toggle" onClick={(e) => { e.preventDefault(); props.setCategory(""); props.setSort("asc") }}> All </a> </div>
+                    </div>
                     { categories?.map((item, index) => 
                     <div className="accordion-group" key={index}>
                         <div className="accordion-heading"> <a className="accordion-toggle" onClick={(e) => { e.preventDefault(); props.setCategory(item); props.setSort("") }}> { item } </a> </div>

@@ -10,10 +10,9 @@ import Testimonials from '../sidebar/Testimonials'
 function SideBar(props) {
     return (
         <div className="col-xs-12 col-sm-12 col-md-3 sidebar"> 
-            <TopNavigation/>
+            {/* <TopNavigation/> */}
             <HotDeals/>
             <SpecialOffer/>
-            <ProductTag/>
             <SpecialDeals/>
             <NewLetter/>
             <Testimonials/>

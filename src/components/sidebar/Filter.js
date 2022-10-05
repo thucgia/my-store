@@ -1,6 +1,5 @@
 import React from 'react';
 import CategoryFilter from './CategoryFilter';
-import ColorFilter from './ColorFilter';
 import ManufacturesFilter from './ManufacturesFilter';
 import PriceSilderFilter from './PriceSilderFilter';
 import ProductTag from './ProductTag';
@@ -12,7 +11,6 @@ function Filter(props) {
                 <CategoryFilter setCategory={props.setCategory} setSort={props.setSort}/>
                 <PriceSilderFilter/>
                 <ManufacturesFilter/>
-                <ColorFilter/>
                 <ProductTag/>
             </div>
         </div>

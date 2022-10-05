@@ -533,11 +533,10 @@ img[src="assets/images/blank.gif"] {
 .new-arriavls .cart-btn {display:none}
 
 .latest-blog {
-	margin-bottom: 30px;
-    background-color: #fff;
-	border-radius:5px
-
-	
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 400px;
 }
 
 .latest-blog .btn-primary {margin:3px}
@@ -553,7 +552,18 @@ img[src="assets/images/blank.gif"] {
     padding: 18px 20px;
 }
 
-.latest-blog .blog-slider {padding-left: 20px; padding-bottom:25px;}
+.latest-blog .blog-slider {
+  padding-left: 20px;
+  padding-bottom:25px;
+  /* position: relative; */
+}
+
+.latest-blog .blog-slider .item {
+  width: 418px;
+  float: left;
+  position: relative;
+}
+
 .latest-blog .blog-post {margin-right:25px}
 .latest-blog .blog-post img {width:100%}
 
@@ -604,7 +614,8 @@ img[src="assets/images/blank.gif"] {
   border-color: #d8d8d8;
 }
 .animate-dropdown .open > .dropdown-menu,
-.animate-dropdown .open > .dropdown-menu > .dropdown-submenu > .dropdown-menu {
+.animate-dropdown .open > .dropdown-menu > .dropdown-submenu > .dropdown-menu,
+.panel-collapse.collapse.in {
   animation-name: slidenavAnimation;
   animation-duration: 200ms;
   animation-iteration-count: 1;
@@ -621,6 +632,7 @@ img[src="assets/images/blank.gif"] {
   -moz-animation-timing-function: ease-out;
   -moz-animation-fill-mode: forwards;
 }
+
 @keyframes slidenavAnimation {
   from {
     margin-top: -30px;
@@ -1974,10 +1986,12 @@ header{
   transition: all 200ms ease-out;
 }
 
-.sidebar-widget { background-color: #fff;
-	padding:20px;
-	border-radius:5px
-	}
+.sidebar-widget {
+  background-color: #fff;
+  padding:20px;
+  border-radius:5px;
+  margin: 0 0 20px 0;
+}
 
 .related-product .tag {
   font-size: 15px;

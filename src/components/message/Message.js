@@ -10,7 +10,7 @@ function Message(props) {
                 <p>{ props.message }</p>
 
                 <div className="modal__footer">
-                    <button className='btn btn-secondary' onClick={ () => { props.deleteCartItem(props.delCartItem); props.setShowMessage("") } }>OK</button>
+                    <button className='btn btn-secondary' onClick={ () => { props.deleteCartItem(props.cartItem); props.setShowMessage(""); } }>OK</button>
                 </div>
 
                 <button className="modal__close" onClick={() => props.setShowMessage("")}>&times;</button>

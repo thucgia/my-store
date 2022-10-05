@@ -11,35 +11,7 @@ export const menu_list = [
     {
         id: "services",
         parent: "Dịch vụ",
-        child: [
-            {child: [
-                "Ép kính",
-                "Sửa chữa",
-                "Nâng cấp phần mềm"
-            ]}
-        ],
-        image: "",
-        type: "pages",
-        mega_menu: false,
-        route: "category"
-    },
-    {
-        id: "phone_type",
-        parent: "Điện thoại",
-        child: [
-            {child: [
-                "iPhone",
-                "Samsung",
-                "Oppo",
-                "Xiaomi",
-                "Huawei",
-                "Vivo",
-                "Sony",
-                "LG",
-                "Zenfone",
-                "HTC"
-            ]}
-        ],
+        child: [],
         image: "",
         type: "pages",
         mega_menu: false,

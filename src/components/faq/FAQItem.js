@@ -11,7 +11,7 @@ function FAQItem(props) {
                 </a>
                 </h4>
             </div>
-            <div id="collapseNine" className={"panel-collapse collapse" + (collapse ? " in":  "")}>
+            <div className={"panel-collapse collapse" + (collapse ? " in":  "")}>
                 <div className="panel-body">
                     { props.answer }
                 </div>

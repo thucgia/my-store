@@ -10,8 +10,8 @@ function Home(props) {
         <div className="body-content outer-top-vs" id="top-banner-and-menu">
             <div className="container">
                 <div className="row">
-                    <SideBar/>
-                    <Content cart={props.cart} setCart={props.setCart}/>
+                    {/* <SideBar/> */}
+                    <Content setCart={props.setCart}/>
                 </div>
             </div>
         </div>

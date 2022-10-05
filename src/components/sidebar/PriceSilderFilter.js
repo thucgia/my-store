@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './temp.css'
 
 function PriceSilderFilter(props) {
+    const [ range, setRange ] = useState({rangeMin: 10, rangeMax: 200})
+
+    const handleChangeRange = (e) => {
+        // check (min < max)
+        // end check
+        setRange({ ...range, [e.target.name] : e.target.value })
+    }
+
+    // useEffect(() => {
+    //     if (range.rangeMin > range.rangeMax) {
+
+    //     }
+    // }, [range])
+
     return (
         <div className="sidebar-widget">
             <div className="widget-header">
                 <h4 className="widget-title">Price Slider</h4>
             </div>
             <div className="sidebar-widget-body m-t-10">
-                <div className="price-range-holder"> <span className="min-max"> <span className="pull-left">$200.00</span> <span className="pull-right">$800.00</span> </span>
-                    <input type="text" id="amount" style={{border: "0", color: "#666666", fontWeight: "bold", textAlign: "center"}} />
-                    <input type="text" className="price-slider" defaultValue={""} />
-                </div>
-                {/* <!-- /.price-range-holder --> */}
-                <a href="!#" className="lnk btn btn-primary">Show Now</a> </div>
-            {/* <!-- /.sidebar-widget-body --> */}
+                <section className="range-slider container-range">
+                    <span className="full-range"></span>
+                    <span className="incl-range"></span>
+                    <input name="rangeMin" defaultValue={10} min="0" max="800" step="1" type="range" onChange={handleChangeRange}/>
+                    <input name="rangeMax" defaultValue={200} min="0" max="800" step="1" type="range" onChange={handleChangeRange}/>
+                </section>
+                <a href="!#" className="lnk btn btn-primary">Show Now</a>
+            </div>
         </div>
     );
 }

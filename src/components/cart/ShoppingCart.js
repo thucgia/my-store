@@ -37,7 +37,7 @@ function ShoppingCart(props) {
                                         </thead>
                                         
                                         <tbody>
-                                            { props.cart && props.cart.map((item, index) => <CartItem key={index} {...item} setCart={props.setCart} setShowMessage={props.setShowMessage} setDelCartItem={props.setDelCartItem}/>) }
+                                            { props.cart && props.cart.map((item, index) => <CartItem key={index} {...item} updateProductQuatity={props.updateProductQuatity} deleteCartItem={props.deleteCartItem} />) }
                                         </tbody>
                                     </table>
                                 </div>
@@ -121,10 +121,10 @@ function ShoppingCart(props) {
                                         <tr>
                                             <th>
                                                 <div className="cart-sub-total">
-                                                    Subtotal<span className="inner-left-md">${props.cart.reduce((prev, total) => prev + (total.price * total.count), 0)}</span>
+                                                    Subtotal<span className="inner-left-md">${props.totalPrice}</span>
                                                 </div>
                                                 <div className="cart-grand-total">
-                                                    Grand Total<span className="inner-left-md">${props.cart.reduce((prev, total) => prev + (total.price * total.count), 0)}</span>
+                                                    Grand Total<span className="inner-left-md">${props.totalPrice}</span>
                                                 </div>
                                             </th>
                                         </tr>

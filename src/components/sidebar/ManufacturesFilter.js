@@ -8,12 +8,16 @@ function ManufacturesFilter(props) {
             </div>
             <div className="sidebar-widget-body">
                 <ul className="list">
-                    <li><a href="!#">Forever 18</a></li>
-                    <li><a href="!#">Nike</a></li>
-                    <li><a href="!#">Dolce & Gabbana</a></li>
-                    <li><a href="!#">Alluare</a></li>
-                    <li><a href="!#">Chanel</a></li>
-                    <li><a href="!#">Other Brand</a></li>
+                    <li><a href="!#">iPhone</a></li>
+                    <li><a href="!#">Samsung</a></li>
+                    <li><a href="!#">Oppo</a></li>
+                    <li><a href="!#">Xiaomi</a></li>
+                    <li><a href="!#">Huawei</a></li>
+                    <li><a href="!#">Vivo</a></li>
+                    <li><a href="!#">Sony</a></li>
+                    <li><a href="!#">LG</a></li>
+                    <li><a href="!#">Zenfone</a></li>
+                    <li><a href="!#">HTC</a></li>
                 </ul>
                 {/* <!--<a href="!#" className="lnk btn btn-primary">Show Now</a>--> */}
             </div>
