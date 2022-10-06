@@ -44,7 +44,6 @@ function Content(props) {
     };
     const responsive_experts_img = {
         superLargeDesktop: {
-            // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 3000 },
             items: 3
         },
@@ -86,7 +85,7 @@ function Content(props) {
                                 renderButtonGroupOutside={true}
                                 customButtonGroup={<CarouselButtonGroup/>}
                             >
-                                {products?.map((item, index) => <ProductItem key={index} {...item} width="184px" setCart={props.setCart} />)}
+                                {products?.map((item, index) => <ProductItem key={index} product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart} />)}
                             </Carousel>
                             </div>
                         </div>

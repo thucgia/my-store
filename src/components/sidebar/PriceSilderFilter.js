@@ -1,34 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import './temp.css'
+import React, { useState } from 'react';
 
 function PriceSilderFilter(props) {
-    const [ range, setRange ] = useState({rangeMin: 10, rangeMax: 200})
+    const [ range, setRange ] = useState({rangeMin: 0, rangeMax: 0})
 
     const handleChangeRange = (e) => {
-        // check (min < max)
-        // end check
-        setRange({ ...range, [e.target.name] : e.target.value })
+        let range_min = (e.target.name === "rangeMin") ? e.target.value : range.rangeMin
+        let range_max = (e.target.name === "rangeMax") ? e.target.value : range.rangeMax
+        if ( parseFloat(range_min) <= parseFloat(range_max) ) {
+            setRange({ ...range, [e.target.name] : e.target.value })
+        }
     }
-
-    // useEffect(() => {
-    //     if (range.rangeMin > range.rangeMax) {
-
-    //     }
-    // }, [range])
 
     return (
         <div className="sidebar-widget">
             <div className="widget-header">
                 <h4 className="widget-title">Price Slider</h4>
             </div>
+            <div className='tooltip-cus'>
+
             <div className="sidebar-widget-body m-t-10">
                 <section className="range-slider container-range">
                     <span className="full-range"></span>
                     <span className="incl-range"></span>
-                    <input name="rangeMin" defaultValue={10} min="0" max="800" step="1" type="range" onChange={handleChangeRange}/>
-                    <input name="rangeMax" defaultValue={200} min="0" max="800" step="1" type="range" onChange={handleChangeRange}/>
+                    <input
+                        name="rangeMin"
+                        value={range.rangeMin}
+                        min="0"
+                        max={props.maxPrice}
+                        step="1"
+                        type="range"
+                        onChange={handleChangeRange}
+                    />
+                    <input
+                        name="rangeMax"
+                        value={range.rangeMax}
+                        min="0"
+                        max={props.maxPrice}
+                        step="1"
+                        type="range"
+                        onChange={handleChangeRange}
+                    />
+                    <span className='price-min-max'>
+                        <span className='pull-left'>$ {props.minPrice}</span>
+                        <span className='pull-right'>$ {props.maxPrice}</span>
+                    </span>
+                    <span className="tooltiptext tooltip-top">{ range.rangeMin } : { range.rangeMax }</span>
                 </section>
-                <a href="!#" className="lnk btn btn-primary">Show Now</a>
+                <a href="!#" className="lnk btn btn-primary" onClick={e => { e.preventDefault(); props.rangePrice(range); }}>Show Now</a>
+            </div>
             </div>
         </div>
     );

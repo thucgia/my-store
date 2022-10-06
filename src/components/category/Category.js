@@ -7,13 +7,17 @@ import Loading from '../loading/Loading'
 
 function Category(props) {
     const getProductsInCategory = useAPI(categoryAPI.getProductsInCategory)
-    const getProductsSort = useAPI(categoryAPI.getProducts_Sort)
 
     const [ category, setCategory ] = useState("")
     const [ sort, setSort ] = useState("")
     const [ showSortMenu, setShowSort ] = useState(false)
     const [ showRecords, setShowRecords ] = useState(false)
     const [ products, setProducts ] = useState([])
+    // stored product when filter
+    const [ productsFilter, setProductFilter ] = useState([])
+    // stored product when filter
+    const [ minPrice, setMinPrice ] = useState(0)
+    const [ maxPrice, setMaxPrice ] = useState(0)
     // pagination
     const [ currentPage, setCurrentPage ] = useState(1)
     const [ numPages, setNumPages ] = useState(0)
@@ -56,28 +60,43 @@ function Category(props) {
         setShowRecords(false)
     }
     // end
+
+    const sortProductPrice = (type) => {
+        if (type === "asc") setProducts([...products].sort((a, b) => a.price - b.price))
+        else setProducts([...products].sort((a, b) => b.price - a.price))
+    }
+
+    const rangePrice = (range) => {
+        setProducts([...productsFilter].filter(item => range.rangeMin <= item.price && item.price <= range.rangeMax))
+    }
+
     useEffect(() => {
         document.title = props.title
     }, [])
 
     useEffect(() => {
         let getData = null
-        if (sort === "") {
-            getData = getProductsInCategory.request(category)
-        } else {
-            getData = getProductsSort.request(sort)
-        }
+        getData = getProductsInCategory.request(category ? category : "")
         getData.then(data => {
             setNumPages(Math.ceil(data.result.length / records))
             setProducts(data.result)
-            setCurrentPage(1)
+            setProductFilter(data.result)
         })
-    }, [ category, sort ])
+    }, [ category ])
+
+    useEffect(() => {
+        if (sort !== "") {
+            sortProductPrice(sort)
+        }
+    }, [ sort ])
 
     useEffect(() => {
         if (products.length !== 0) {
             setNumPages(Math.ceil(products.length / records))
+            setCurrentPage(1)
             changePage(1)
+            setMinPrice(Math.floor(productsFilter.reduce((prev, current) => { return prev.price < current.price ? prev : current }, 0).price))
+            setMaxPrice(Math.ceil(productsFilter.reduce((prev, current) => { return prev.price > current.price ? prev : current }, 0).price))
         }
     }, [products, numPages])
 
@@ -101,7 +120,7 @@ function Category(props) {
             <div className="body-content outer-top-xs">
                 <div className='container'>
                     <div className='row'>
-                        <SideBar setCategory={setCategory} setSort={setSort}/>
+                        <SideBar setCategory={setCategory} setSort={setSort} rangePrice={rangePrice} minPrice={minPrice} maxPrice={maxPrice} />
                         <div className="col-xs-12 col-sm-12 col-md-9 rht-col">
                             <div className="clearfix filters-container">
                             <div className="row">
@@ -120,8 +139,8 @@ function Category(props) {
                                                 </button>
                                                 <ul role="menu" className="dropdown-menu" onMouseLeave={() => setShowSort(false)}>
                                                     <li role="presentation"></li>
-                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("desc"); setCategory("") }} style={{ cursor:"pointer" }}>Price:Lowest first</a></li>
-                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("asc"); setCategory("") }} style={{ cursor:"pointer" }}>Price:HIghest first</a></li>
+                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("asc"); }} style={{ cursor:"pointer" }}>Price:Lowest first</a></li>
+                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("desc"); }} style={{ cursor:"pointer" }}>Price:HIghest first</a></li>
                                                 </ul>
                                                 </div>
                                             </div>
@@ -166,7 +185,7 @@ function Category(props) {
                                 <div className="category-product">
                                     <div className="row">
                                     { productsShowing?.map((item, index) => 
-                                        <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem {...item} width="184px" setCart={props.setCart}/></div>
+                                        <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart}/></div>
                                     ) }
                                     </div>
                                 </div>

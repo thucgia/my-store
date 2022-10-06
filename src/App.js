@@ -22,6 +22,27 @@ function App(props) {
 
     const totalPrice = () => cart.reduce((prev, total) => prev + (total.price * total.count), 0)
 
+    const addToCart = (product) => {
+        setCart((prevState) => {
+            // Check item is existed
+            let product_id = prevState.findIndex(item => item.id === product.id)
+            // END
+            let items = [...prevState]
+            if (product_id !== -1) {
+                items[product_id].count++
+            } else {
+                items.push({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image,
+                    count: 1
+                })
+            }
+            return items
+        })
+    }
+
     const deleteCartItem = (id) => {
         setCart((prevState) => {
             let items = [...prevState]
@@ -57,7 +78,7 @@ function App(props) {
                 <Routes>
                     <Route
                         path='/'
-                        element={<Home setCart={setCart} title="Trang chủ" />}
+                        element={<Home setCart={setCart} title="Trang chủ" addToCart={addToCart} />}
                     />
                     <Route
                         path='/login'
@@ -65,7 +86,7 @@ function App(props) {
                     />
                     <Route
                         path='/category'
-                        element={<Category setCart={setCart} title="Sản phẩm" />}
+                        element={<Category setCart={setCart} title="Sản phẩm" addToCart={addToCart} />}
                     />
                     <Route
                         path='/faq'

@@ -9,7 +9,7 @@ function Filter(props) {
         <div className="sidebar-module-container">
             <div className="sidebar-filter">
                 <CategoryFilter setCategory={props.setCategory} setSort={props.setSort}/>
-                <PriceSilderFilter/>
+                <PriceSilderFilter rangePrice={props.rangePrice} minPrice={props.minPrice} maxPrice={props.maxPrice}/>
                 <ManufacturesFilter/>
                 <ProductTag/>
             </div>
