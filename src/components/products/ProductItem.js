@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ProductItem(props) {
     return (
@@ -15,7 +16,7 @@ function ProductItem(props) {
                     </div>
                     
                     <div className="product-info text-left">
-                        <h3 className="name"><a href="detail.html">{props.product.name}</a></h3>
+                        <h3 className="name"><Link to={`/product/${props.product.id}`}>{props.product.title}</Link></h3>
                         <div className="rating rateit-small"></div>
                         <div className="description"></div>
                         <div className="product-price"> <span className="price"> ${props.product.price} </span> <span className="price-before-discount">$ {props.product.price_before_discount}</span> </div>

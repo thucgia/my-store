@@ -13,6 +13,7 @@ import ShoppingCart from './components/cart/ShoppingCart';
 import Message from './components/message/Message';
 import useToken from './auth/useToken';
 import ScrollToTop from './ScrollToTop';
+import ProductDetail from './components/products/ProductDetail';
 
 function App(props) {
     const { token, setToken, removeToken } = useToken()
@@ -52,21 +53,36 @@ function App(props) {
         })
     }
 
-    const updateProductQuatity = (type, product_id) => {
-        setCart(prevState => {
-            let items = [...prevState]
-            let index = prevState.findIndex(item => item.id === product_id)
-            if (type === "plus") items[index].count++
-            else if (type === "minus") {
-                if (items[index].count === 1) {
+    const updateProductQuatity = (arrow, type, product_id) => {
+        if (arrow) {
+            setCart(prevState => {
+                let items = [...prevState]
+                let index = prevState.findIndex(item => item.id === product_id)
+                if (type === "plus") items[index].count++
+                else if (type === "minus") {
+                    if (items[index].count === 1) {
+                        setShowMessage("Remove CartItem?")
+                        setCartItem(product_id)
+                    } else {
+                        items[index].count--
+                    }
+                }
+                return items
+            })
+        } else {
+            let value = type
+            setCart(prevState => {
+                let items = [...prevState]
+                let index = prevState.findIndex(item => item.id === product_id)
+                if (isNaN(value)) {
                     setShowMessage("Remove CartItem?")
                     setCartItem(product_id)
                 } else {
-                    items[index].count--
+                    items[index].count = value
                 }
-            }
-            return items
-        })
+                return items
+            })
+        }
     }
 
     return (
@@ -103,6 +119,10 @@ function App(props) {
                     <Route
                         path='/shopping-cart'
                         element={ (!token) ? (<Navigate replace to="/login" />) : <ShoppingCart deleteCartItem={deleteCartItem} totalPrice={totalPrice()} cart={cart} setCart={setCart} title="Giỏ hàng" updateProductQuatity={updateProductQuatity} />}
+                    />
+                    <Route
+                        path='/product/:productId'
+                        element={ (!token) ? (<Navigate replace to="/login" />) : <ProductDetail setCart={setCart} addToCart={addToCart}/> }
                     />
                     <Route
                         path='*'

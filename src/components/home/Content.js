@@ -3,8 +3,8 @@ import ProductItem from '../products/ProductItem';
 import { blog_list } from '../../resources/bloglist';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import BlogItem from '../blogs/BlogItem';
 import CarouselButtonGroup from '../carousel-btn-group/CarouselButtonGroup'
+import BlogItem from '../blogs/BlogItem';
 import { useAPI } from '../../hooks/useAPI'
 import productAPI from '../../api/products'
 import Loading from '../loading/Loading'

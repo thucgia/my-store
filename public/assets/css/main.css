@@ -4139,6 +4139,7 @@ font-family: FontAwesome;
   letter-spacing:1px;
   background: #f8f8f8;
   border: 1px #fff solid;
+  cursor: pointer;
 }
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell > li > a:hover,
 .single-product .product-tabs .nav.nav-tabs.nav-tab-cell > li > a:focus {

@@ -14,7 +14,7 @@ function MainHeader(props) {
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
-                        <div className="logo"><Link to="/"><img src="assets/images/logo.png" alt="logo"/></Link></div>
+                        <div className="logo"><Link to="/"><img src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo"/></Link></div>
                     </div>
                     <div className="col-lg-7 col-md-6 col-sm-8 col-xs-12 top-search-holder"> 
                         <div className="search-area">

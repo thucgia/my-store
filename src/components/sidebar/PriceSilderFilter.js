@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function PriceSilderFilter(props) {
-    const [ range, setRange ] = useState({rangeMin: 0, rangeMax: 0})
+    const [ range, setRange ] = useState({})
 
     const handleChangeRange = (e) => {
         let range_min = (e.target.name === "rangeMin") ? e.target.value : range.rangeMin
@@ -11,8 +11,13 @@ function PriceSilderFilter(props) {
         }
     }
 
+    useEffect(() => {
+        setRange({rangeMin: props.minPrice, rangeMax: props.maxPrice})
+    }, [])
+
     return (
         <div className="sidebar-widget">
+            {console.log(props.minPrice)}
             <div className="widget-header">
                 <h4 className="widget-title">Price Slider</h4>
             </div>
