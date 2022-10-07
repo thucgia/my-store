@@ -1,9 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartItemPreview from '../cart/CartItemPreview';
+import { useAPI } from '../../hooks/useAPI';
+import productAPI from '../../api/products'
 
 function MainHeader(props) {
     const [ openCartTotal, setOpenCartTotal ] = useState(false)
+    const [ searchString, setSearchString ] = useState("")
+    const [ products, setProducts ] = useState([])
+
+    const getProducts = useAPI(productAPI.getProducts)
+
+    const searchItem = () => {
+        getProducts.request(searchString)
+        .then(res => {
+            let products = res.result
+            let re = new RegExp(searchString, "gi")
+            setProducts(() => products.filter(s => s.title.match(re)))
+        })
+    }
+
+    const handleInputSearch = (e) => {
+        setSearchString(e.target.value)
+    }
+
     useEffect(() => {
         return () => {
             setOpenCartTotal(false)
@@ -20,8 +40,8 @@ function MainHeader(props) {
                         <div className="search-area">
                             <form>
                                 <div className="control-group">
-                                    <input className="search-field"/>
-                                    <a className="search-button" href="!#" ></a>
+                                    <input className="search-field" onChange={handleInputSearch} value={searchString}/>
+                                    <a className="search-button" href="!#" onClick={e=> {e.preventDefault(); searchItem();}} ></a>
                                 </div>
                             </form>
                         </div>

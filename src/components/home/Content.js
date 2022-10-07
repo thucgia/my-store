@@ -32,14 +32,6 @@ function Content(props) {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
             items: 5
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
         }
     };
     const responsive_experts_img = {
@@ -62,13 +54,13 @@ function Content(props) {
             { getProductsAPI.loading && <Loading/> }
             <div id="product-tabs-slider" className="scroll-tabs">
                 <div className="more-info-tab clearfix ">
-                    <h3 className="new-product-title pull-left">New Products</h3>
+                    <h3 className="new-product-title pull-left">Hot Services</h3>
                 </div>
                 <div className="tab-content outer-top-xs">
                     <div className="tab-pane in active" id="all">
                         <div className="product-slider">
                             <div className="home-owl-carousel custom-carousel owl-theme" style={{ position: "relative" }}>
-                            <Carousel
+                                <Carousel
                                 arrows={false}
                                 swipeable={false}
                                 draggable={false}
@@ -85,7 +77,7 @@ function Content(props) {
                                 renderButtonGroupOutside={true}
                                 customButtonGroup={<CarouselButtonGroup/>}
                             >
-                                {products?.map((item, index) => <ProductItem key={index} product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart} />)}
+                                {products?.map((item, index) => <ProductItem key={index} product={item} setCart={props.setCart} addToCart={props.addToCart} width={"235px"} />)}
                             </Carousel>
                             </div>
                         </div>

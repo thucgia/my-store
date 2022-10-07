@@ -10,6 +10,7 @@ function Category(props) {
 
     const [ category, setCategory ] = useState("")
     const [ sort, setSort ] = useState("")
+    const [ sortName, setSortName ] = useState("")
     const [ showSortMenu, setShowSort ] = useState(false)
     const [ showRecords, setShowRecords ] = useState(false)
     const [ products, setProducts ] = useState([])
@@ -20,7 +21,7 @@ function Category(props) {
     const [ maxPrice, setMaxPrice ] = useState(0)
     // pagination
     const [ currentPage, setCurrentPage ] = useState(1)
-    const [ numPages, setNumPages ] = useState(0)
+    const [ numPages, setNumPages ] = useState(1)
     const [ btnPrev, setBtnPrev ] = useState(false)
     const [ btnNext, setBtnNext ] = useState(false)
     const [ productsShowing, setProductsShowing ] = useState([])
@@ -78,7 +79,7 @@ function Category(props) {
         let getData = null
         getData = getProductsInCategory.request(category ? category : "")
         getData.then(data => {
-            setNumPages(Math.ceil(data.result.length / records))
+            // setNumPages(Math.ceil(data.result.length / records))
             setProducts(data.result)
             setProductFilter(data.result)
         })
@@ -92,17 +93,27 @@ function Category(props) {
 
     useEffect(() => {
         if (products.length !== 0) {
+            // change products list => rerender
             setNumPages(Math.ceil(products.length / records))
             setCurrentPage(1)
             changePage(1)
             setMinPrice(Math.floor(productsFilter.reduce((prev, current) => { return prev.price < current.price ? prev : current }, 0).price))
             setMaxPrice(Math.ceil(productsFilter.reduce((prev, current) => { return prev.price > current.price ? prev : current }, 0).price))
         }
-    }, [products, numPages])
+    }, [products])
 
     useEffect(() => {
-        setNumPages(Math.ceil(products.length / records))
+        if (products.length !== 0) {
+            setNumPages(Math.ceil(products.length / records))
+            setCurrentPage(1)
+            changePage(1)
+        }
     }, [ records ])
+
+    useEffect(() => {
+        setCurrentPage(1)
+        changePage(1)
+    }, [numPages])
 
     return (
         <>
@@ -135,12 +146,13 @@ function Category(props) {
                                                     className="btn dropdown-toggle"
                                                     onClick={() => setShowSort(!showSortMenu)}
                                                 >
+                                                    { sortName }
                                                     <span className="caret"></span>
                                                 </button>
                                                 <ul role="menu" className="dropdown-menu" onMouseLeave={() => setShowSort(false)}>
                                                     <li role="presentation"></li>
-                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("asc"); }} style={{ cursor:"pointer" }}>Price:Lowest first</a></li>
-                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("desc"); }} style={{ cursor:"pointer" }}>Price:HIghest first</a></li>
+                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("asc"); setSortName(e.target.innerHTML); setShowSort(false); }} style={{ cursor:"pointer" }}>Price:Lowest first</a></li>
+                                                    <li role="presentation"><a onClick={e => { e.preventDefault(); setSort("desc"); setSortName(e.target.innerHTML); setShowSort(false); }} style={{ cursor:"pointer" }}>Price:Highest first</a></li>
                                                 </ul>
                                                 </div>
                                             </div>
@@ -185,6 +197,7 @@ function Category(props) {
                                 <div className="category-product">
                                     <div className="row">
                                     { productsShowing?.map((item, index) => 
+                                        // <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart}/></div>
                                         <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart}/></div>
                                     ) }
                                     </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 function PriceSilderFilter(props) {
-    const [ range, setRange ] = useState({})
+    const [ range, setRange ] = useState({rangeMin: 0, rangeMax: 0})
 
     const handleChangeRange = (e) => {
         let range_min = (e.target.name === "rangeMin") ? e.target.value : range.rangeMin
@@ -12,12 +12,11 @@ function PriceSilderFilter(props) {
     }
 
     useEffect(() => {
-        setRange({rangeMin: props.minPrice, rangeMax: props.maxPrice})
-    }, [])
+        setRange(prevState => ({ ...prevState, rangeMin: props.minPrice, rangeMax: props.maxPrice }))
+    }, [props.minPrice, props.maxPrice])
 
     return (
         <div className="sidebar-widget">
-            {console.log(props.minPrice)}
             <div className="widget-header">
                 <h4 className="widget-title">Price Slider</h4>
             </div>
@@ -26,7 +25,7 @@ function PriceSilderFilter(props) {
             <div className="sidebar-widget-body m-t-10">
                 <section className="range-slider container-range">
                     <span className="full-range"></span>
-                    <span className="incl-range"></span>
+                    <span className="incl-range" style={{ width: ((range.rangeMax - range.rangeMin) / props.maxPrice) * 100 + "%", left: (range.rangeMin / props.maxPrice) * 100 + "%" }}></span>
                     <input
                         name="rangeMin"
                         value={range.rangeMin}
@@ -35,6 +34,7 @@ function PriceSilderFilter(props) {
                         step="1"
                         type="range"
                         onChange={handleChangeRange}
+                        className="left-range"
                     />
                     <input
                         name="rangeMax"
@@ -44,7 +44,10 @@ function PriceSilderFilter(props) {
                         step="1"
                         type="range"
                         onChange={handleChangeRange}
+                        className="right-range"
                     />
+
+                    
                     <span className='price-min-max'>
                         <span className='pull-left'>$ {props.minPrice}</span>
                         <span className='pull-right'>$ {props.maxPrice}</span>
