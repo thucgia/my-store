@@ -5396,7 +5396,7 @@ font-family: FontAwesome;
 .contact-page .contact-form form input {
   font-size: 14px;
   font-weight: normal;
-  color: #999;
+  /* color: #999; */
 }
 .shopping-cart .estimate-ship-tax table tbody tr td .form-group label span,
 .blog-page .blog-write-comment label span,

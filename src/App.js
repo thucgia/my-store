@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import NotFound from './components/notfound/NotFound';
 import Category from './components/category/Category';
 import FAQ from './components/faq/FAQ';
@@ -14,12 +14,31 @@ import Message from './components/message/Message';
 import useToken from './auth/useToken';
 import ScrollToTop from './ScrollToTop';
 import ProductDetail from './components/products/ProductDetail';
+// Admin
+import AdminHome from './components/admin/home/AdminHome'
+import AdminHeader from './components/admin/header/AdminHeader'
 
 function App(props) {
     const { token, setToken, removeToken } = useToken()
     const [ cart, setCart ] = useState([])
     const [ showMessage, setShowMessage ] = useState("")
     const [ cartItem, setCartItem ] = useState(null)
+
+    // layout define
+    const UserLayout = () => (
+        <>
+            <Header cart={cart} setCart={setCart} totalPrice={totalPrice()} deleteCartItem={deleteCartItem} token={token} removeToken={removeToken}/>
+            <Outlet/>
+            <Footer/>
+        </>
+    )
+
+    const AdminLayout = () => (
+        <>
+            <AdminHeader token={token} removeToken={removeToken}/>
+            <Outlet/>
+        </>
+    )
 
     const totalPrice = () => cart.reduce((prev, total) => prev + (total.price * total.count), 0)
 
@@ -89,48 +108,58 @@ function App(props) {
         <div>
             {(showMessage !== "") && <Message message={showMessage} setShowMessage={setShowMessage} deleteCartItem={deleteCartItem} cartItem={cartItem} />}
             <BrowserRouter>
-            <ScrollToTop/>
-                <Header cart={cart} setCart={setCart} totalPrice={totalPrice()} deleteCartItem={deleteCartItem} token={token} removeToken={removeToken}/>
+                <ScrollToTop/>
                 <Routes>
-                    <Route
-                        path='/'
-                        element={<Home setCart={setCart} title="Trang chủ" addToCart={addToCart} />}
-                    />
-                    <Route
-                        path='/login'
-                        element={ (token) ? (<Navigate replace to="/" />) : <Login title="Đăng nhập - Đăng kí" setToken={setToken} />}
-                    />
-                    <Route
-                        path='/category'
-                        element={<Category setCart={setCart} title="Sản phẩm" addToCart={addToCart} />}
-                    />
-                    <Route
-                        path='/faq'
-                        element={<FAQ title="Mẹo và các câu hỏi thường gặp" /> }
-                    />
-                    <Route
-                        path='/contact'
-                        element={<Contact title="Liên hệ" />}
-                    />
-                    <Route
-                        path='/profile'
-                        element={ (!token) ? (<Navigate replace to="/login" />) : <UpdateProfile title="Cập nhật tài khoản" /> }
-                    />
-                    <Route
-                        path='/shopping-cart'
-                        element={ (!token) ? (<Navigate replace to="/login" />) : <ShoppingCart deleteCartItem={deleteCartItem} totalPrice={totalPrice()} cart={cart} setCart={setCart} title="Giỏ hàng" updateProductQuatity={updateProductQuatity} />}
-                    />
-                    <Route
-                        path='/product/:productId'
-                        element={ (!token) ? (<Navigate replace to="/login" />) : <ProductDetail setCart={setCart} addToCart={addToCart}/> }
-                    />
-                    <Route
-                        path='*'
-                        element={<NotFound title="Không tìm thấy trang" />}
-                    />
+                    <Route element={<UserLayout/>}>
+                        <Route
+                            path='/'
+                            element={<Home setCart={setCart} title="Trang chủ" addToCart={addToCart} />}
+                        />
+                        <Route
+                            path='/login'
+                            element={ (token) ? (<Navigate replace to="/" />) : <Login title="Đăng nhập - Đăng kí" setToken={setToken} />}
+                        />
+                        <Route
+                            path='/category'
+                            element={<Category setCart={setCart} title="Sản phẩm" addToCart={addToCart} />}
+                        />
+                        <Route
+                            path='/faq'
+                            element={<FAQ title="Mẹo và các câu hỏi thường gặp" /> }
+                        />
+                        <Route
+                            path='/contact'
+                            element={<Contact title="Liên hệ" />}
+                        />
+                        <Route
+                            path='/profile'//unit test: login + cart (add, update, delete) + getdata
+                            element={ (!token) ? (<Navigate replace to="/login" />) : <UpdateProfile title="Cập nhật tài khoản" /> }
+                        />
+                        <Route
+                            path='/shopping-cart'
+                            element={ (!token) ? (<Navigate replace to="/login" />) : <ShoppingCart deleteCartItem={deleteCartItem} totalPrice={totalPrice()} cart={cart} setCart={setCart} title="Giỏ hàng" updateProductQuatity={updateProductQuatity} />}
+                        />
+                        <Route
+                            path='/product/:productId'
+                            element={ (!token) ? (<Navigate replace to="/login" />) : <ProductDetail setCart={setCart} addToCart={addToCart}/> }
+                        />
+                        {/* <Route
+                            path='*'
+                            element={<NotFound title="Không tìm thấy trang" />}
+                        /> */}
+                    </Route>
+                    <Route path='/admin' element={<AdminLayout/>}>
+                        <Route
+                            index
+                            element={ <AdminHome/> }
+                        />
+                        <Route
+                            path='login'
+                            element={ <Login/> }
+                        />
+                    </Route>
                 </Routes>
             </BrowserRouter>
-            <Footer/>
         </div>
     );
     

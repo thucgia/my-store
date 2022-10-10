@@ -196,7 +196,8 @@ function Category(props) {
                                 <div className="tab-pane active " id="grid-container">
                                 <div className="category-product">
                                     <div className="row">
-                                    { productsShowing?.map((item, index) => 
+                                    { (!getProductsInCategory.loading) && (products.length === 0) ? <h1>No Data</h1> : 
+                                     productsShowing?.map((item, index) => 
                                         // <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart}/></div>
                                         <div className="col-sm-6 col-md-4 col-lg-3" key={index}><ProductItem product={item} width="184px" setCart={props.setCart} addToCart={props.addToCart}/></div>
                                     ) }

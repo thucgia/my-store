@@ -19,7 +19,7 @@ function HeaderTop(props) {
                                 <li className="myaccount"><Link to="/profile"><span>My Account</span></Link></li>
                                 <li className="login"><a style={{ cursor: "pointer" }} onClick={ logOut }><span>Logout</span></a></li>
                             </> :
-                            <li className="login"><Link to="/login"><span>Login</span></Link></li>
+                            <li className="login"><Link to="login"><span>Login</span></Link></li>
                             }
                         </ul>
                     </div>

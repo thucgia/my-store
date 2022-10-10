@@ -1,11 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../loading/Loading';
 
 function Contact(props) {
+    const initContactState = { to_name: "Admin", from_name: "", from_email: "", subject: "", messages: "" }
+    const [ contact, setContact ] = useState({ to_name: "Admin", from_name: "", from_email: "", subject: "", messages: "" })
+    const [ isLoading, setIsLoading ] = useState(false)
+
     useEffect(() => {
         document.title = props.title
     }, [])
+
+    const handleContact = (e) => {
+        setContact({ ...contact, [e.target.name]: e.target.value })
+    }
+    
+    const sendMessage = () => {
+        setIsLoading(true)
+        emailjs.send('service_01', 'template_01', contact, 'mAzlYpRK1dUef09dF')
+        .then(res => {
+            toast.success(res.text, { position: toast.POSITION.TOP_RIGHT})
+        }, (error => {
+            toast.error(error.text, { position: toast.POSITION.TOP_RIGHT})
+        }))
+        .finally(() => {
+            setIsLoading(false)
+            setContact(initContactState)
+        })
+    }
+
     return (
         <>
+            { isLoading && <Loading/> }
+            <ToastContainer/>
             <div className="breadcrumb">
                 <div className="container">
                     <div className="breadcrumb-inner">
@@ -28,7 +57,15 @@ function Contact(props) {
                                     <form className="register-form">
                                         <div className="form-group">
                                             <label className="info-title" htmlFor="exampleInputName">Your Name <span>*</span></label>
-                                            <input type="email" className="form-control unicase-form-control text-input" id="exampleInputName" placeholder="" />
+                                            <input
+                                                type="text"
+                                                className="form-control unicase-form-control text-input"
+                                                id="exampleInputName"
+                                                name="from_name"
+                                                placeholder=""
+                                                onChange={handleContact}
+                                                value={ contact.from_name }
+                                            />
                                         </div>
                                     </form>
                                 </div>
@@ -36,7 +73,15 @@ function Contact(props) {
                                     <form className="register-form">
                                         <div className="form-group">
                                             <label className="info-title" htmlFor="exampleInputEmail1">Email Address <span>*</span></label>
-                                            <input type="email" className="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="" />
+                                            <input
+                                                type="email"
+                                                className="form-control unicase-form-control text-input"
+                                                id="exampleInputEmail1"
+                                                name='from_mail'
+                                                placeholder=""
+                                                onChange={handleContact}
+                                                value={ contact.from_mail }
+                                            />
                                         </div>
                                     </form>
                                 </div>
@@ -44,7 +89,15 @@ function Contact(props) {
                                     <form className="register-form">
                                         <div className="form-group">
                                             <label className="info-title" htmlFor="exampleInputTitle">Title <span>*</span></label>
-                                            <input type="email" className="form-control unicase-form-control text-input" id="exampleInputTitle" placeholder="Title" />
+                                            <input
+                                                type="text"
+                                                className="form-control unicase-form-control text-input"
+                                                id="exampleInputTitle"
+                                                name='subject'
+                                                placeholder="Title"
+                                                onChange={handleContact}
+                                                value={ contact.subject }
+                                            />
                                         </div>
                                     </form>
                                 </div>
@@ -52,12 +105,18 @@ function Contact(props) {
                                     <form className="register-form">
                                         <div className="form-group">
                                             <label className="info-title" htmlFor="exampleInputComments">Your Comments <span>*</span></label>
-                                            <textarea className="form-control unicase-form-control" id="exampleInputComments"></textarea>
+                                            <textarea
+                                                className="form-control unicase-form-control"
+                                                id="exampleInputComments"
+                                                name='messages'
+                                                onChange={handleContact}
+                                                value={ contact.messages }
+                                            ></textarea>
                                         </div>
                                     </form>
                                 </div>
                                 <div className="col-md-12 outer-bottom-small m-t-20">
-                                    <button type="submit" className="btn-upper btn btn-primary checkout-page-button">Send Message</button>
+                                    <button type="submit" className="btn-upper btn btn-primary checkout-page-button" onClick={sendMessage}>Send Message</button>
                                 </div>
                             </div>
                             <div className="col-md-4 contact-info">
