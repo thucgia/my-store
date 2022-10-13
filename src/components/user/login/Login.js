@@ -23,6 +23,10 @@ function Login(props) {
         document.title = props.title
     }, [])
 
+    const checkAllFieldIsFilled = (obj) => {
+        return Object.values(obj).every(item => item !== "")
+    }
+
     const handleLogin = (e) => {
         setAction("login")
         const field_name = e.target.name
@@ -43,6 +47,12 @@ function Login(props) {
         const user = {}
         user.username = userLogin["login-username"]
         user.password = userLogin["login-password"]
+
+        if (!checkAllFieldIsFilled(user)) {
+            let fieldNeedFill = "" + (user.username === "" ? "[Username] " : "") + (user.password === "" ? "[Password] " : "")
+            toast.error(fieldNeedFill + "must be filled!", { position: toast.POSITION.TOP_RIGHT })
+            return;
+        }
 
         getUserLogin.request(user)
         .then(res => {
@@ -122,11 +132,11 @@ function Login(props) {
                                 </div> */}
                                 <div className="form-group">
                                     <label className="info-title" htmlFor="login-username">Username <span>*</span></label>
-                                    <input type="text" className="form-control unicase-form-control text-input" id="login-username" required onChange={handleLogin} name="login-username"/>
+                                    <input type="text" className="form-control unicase-form-control text-input" id="login-username" data-testid="login-username" required onChange={handleLogin} name="login-username"/>
                                 </div>
                                 <div className="form-group">
                                     <label className="info-title" htmlFor="login-password">Password <span>*</span></label>
-                                    <input type="password" className="form-control unicase-form-control text-input" id="login-password" required onChange={handleLogin} name="login-password"/>
+                                    <input type="password" className="form-control unicase-form-control text-input" id="login-password" data-testid="login-password" required onChange={handleLogin} name="login-password"/>
                                 </div>
                                 {/* <div className="radio outer-xs">
                                     <label>

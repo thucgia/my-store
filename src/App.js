@@ -110,7 +110,7 @@ function App(props) {
             <BrowserRouter>
                 <ScrollToTop/>
                 <Routes>
-                    <Route element={<UserLayout/>}>
+                    <Route element={<Header cart={cart} setCart={setCart} totalPrice={totalPrice()} deleteCartItem={deleteCartItem} token={token} removeToken={removeToken}/>}>
                         <Route
                             path='/'
                             element={<Home setCart={setCart} title="Trang chủ" addToCart={addToCart} />}
@@ -147,16 +147,6 @@ function App(props) {
                             path='*'
                             element={<NotFound title="Không tìm thấy trang" />}
                         /> */}
-                    </Route>
-                    <Route path='/admin' element={<AdminLayout/>}>
-                        <Route
-                            index
-                            element={ <AdminHome/> }
-                        />
-                        <Route
-                            path='login'
-                            element={ <Login/> }
-                        />
                     </Route>
                 </Routes>
             </BrowserRouter>
