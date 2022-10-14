@@ -1,44 +1,25 @@
 import React, { useState } from 'react';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
-import Home from './components/home/Home';
+import Header from './components/layout/header/Header';
+import Footer from './components/layout/footer/Footer';
+import Home from './components/screen/home/Home';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import NotFound from './components/notfound/NotFound';
-import Category from './components/category/Category';
-import FAQ from './components/faq/FAQ';
-import Contact from './components/contact/Contact';
-import Login from './components/user/login/Login';
-import UpdateProfile from './components/user/profile/UpdateProfile';
-import ShoppingCart from './components/cart/ShoppingCart';
-import Message from './components/message/Message';
+import NotFound from './components/screen/notfound/NotFound';
+import Category from './components/screen/category/Category';
+import FAQ from './components/screen/faq/FAQ';
+import Contact from './components/screen/contact/Contact';
+import Login from './components/screen/user/login/Login';
+import UpdateProfile from './components/screen/user/profile/UpdateProfile';
+import ShoppingCart from './components/screen/cart/ShoppingCart';
+import Message from './components/utils/message/Message';
 import useToken from './auth/useToken';
-import ScrollToTop from './ScrollToTop';
-import ProductDetail from './components/products/ProductDetail';
-// Admin
-import AdminHome from './components/admin/home/AdminHome'
-import AdminHeader from './components/admin/header/AdminHeader'
+import ScrollToTop from './components/utils/ScrollToTop';
+import ProductDetail from './components/screen/product-detail/ProductDetail';
 
 function App(props) {
     const { token, setToken, removeToken } = useToken()
     const [ cart, setCart ] = useState([])
     const [ showMessage, setShowMessage ] = useState("")
     const [ cartItem, setCartItem ] = useState(null)
-
-    // layout define
-    const UserLayout = () => (
-        <>
-            <Header cart={cart} setCart={setCart} totalPrice={totalPrice()} deleteCartItem={deleteCartItem} token={token} removeToken={removeToken}/>
-            <Outlet/>
-            <Footer/>
-        </>
-    )
-
-    const AdminLayout = () => (
-        <>
-            <AdminHeader token={token} removeToken={removeToken}/>
-            <Outlet/>
-        </>
-    )
 
     const totalPrice = () => cart.reduce((prev, total) => prev + (total.price * total.count), 0)
 
@@ -143,13 +124,14 @@ function App(props) {
                             path='/product/:productId'
                             element={ (!token) ? (<Navigate replace to="/login" />) : <ProductDetail setCart={setCart} addToCart={addToCart}/> }
                         />
-                        {/* <Route
+                        <Route
                             path='*'
                             element={<NotFound title="Không tìm thấy trang" />}
-                        /> */}
+                        />
                     </Route>
                 </Routes>
             </BrowserRouter>
+            <Footer/>
         </div>
     );
     
